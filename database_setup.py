@@ -15,6 +15,13 @@ class User(Base):
     phone = Column(String(30))
     address = Column(String(250))
     
+class Account(Base):
+    __tablename__ = 'account'
+
+    id = Column(Integer, primary_key=True)
+    number = Column(String(6), nullable=False)
+    currency = Column(String(3), nullable=False)
+    user = relationship(User, backref='account')
 
 engine = create_engine(DATABASE_CALL)
 Base.metadata.create_all(engine)
